@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <span class="navbar-brand">peek @ meets</span>
+  </div>
+  <div class="collapse navbar-collapse" id="navbar-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+        <a href="#" type="button" class="btn btn-link" id="show-mypeeks-btn"> My Peeks</a>
+      </li>
+      <li class="dropdown">
+        <a href="#" type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" id="change-password-nav"> Change Password <span class="caret"></span></a>
+        <div id="change-password-dropdown" class="dropdown-menu">
+            {{> form-change-password}}
+        </div>
+      </li>
+      <li>
+        <a href="#" type="button" class="btn btn-link" id="sign-out-btn"> Sign Out</a>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,2 +1,52 @@
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
+
+// remove whitespace on left and right sides so navbar will run fill width
+body.container-fluid {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+// set dropdown change password form layout
+.dropdown-menu {
+  min-width: 320px;
+  padding: 15px 15px 0;
+}
+
+// hide validation text below form fields
+.help-block {
+  display: none;
+}
+
+// remove top border from tab ui on public authentication forms
+.tab-content .panel {
+  border-top: 0;
+}
+
+// make file-name anchor text appear on the left
+.file-name {
+  text-align: left;
+}
+
+// temporary fix to vertically center table text
+// should be set in bootstrap-variables
+td {
+  vertical-align: middle !important;
+}
+
+// make table rows appear clickable
+tbody tr {
+  cursor: pointer;
+}
+
+.btn-group {
+  white-space: nowrap;
+  .btn {
+    display: inline-block;
+    float: none;
+  }
+}
+
+.input-group {
+  width: 100%;
+}

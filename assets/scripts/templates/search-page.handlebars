@@ -1,0 +1,69 @@
+<div>
+  <h2>snoop on meetups</h2>
+  <div class="panel-body">
+    <!-- search for meetups -->
+    <form id="m-search" class="form">
+      <fieldset>
+        <legend>search...</legend>
+        <div class="form-group">
+          <label for="m-location" class="sr-only">Location</label>
+          <div class="input-group">
+            <input type="location" class="form-control" name="m_search[location]" id="m_location_place" placeholder="location" value="">
+          </div>
+          <p class="help-block">Please enter a city or zip code.</p>
+        </div>
+        <div class="form-group">
+          <label for="m_radius" class="sr-only">Radius</label>
+          <div class="input-group">
+            <input type="m_radius" class="form-control" name="m_location[radius]" id="m_location_radius" placeholder="5" value="5">
+          </div>
+          <p class="help-block">Please enter distance in miles.</p>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
+</div>
+
+
+{{#if data}}
+  <h2>meetups!</h2>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th class="col-sm-6 col-xs-8">
+          <strong>Meetup id</strong>
+        </th>
+        <th class="col-sm-6 col-xs-4hidden-xs">
+          <strong>Meetup name</strong>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {{#each data as |meeting|}}
+        <tr data-id="{{meeting.event_id}}">
+          <td>{{meeting.event_id}}</td>
+          <td class="col-sm-6 col-xs-8">
+            <a href="{{meeting.event_url}}" class="btn btn-link" target="_blank">{{meeting.name}}</a>
+          </td>
+          <td><button class="btn btn-xs btn-warning">Remind me!</button</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{{/if}}
+
+
+
+<!--
+<ul>
+  <li class="one-meetup">
+    <div class="m-time"></div>
+    <div class="m-group"></div>
+    <div class="m-name"></div>
+  </li>
+</ul> -->
