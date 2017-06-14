@@ -46,8 +46,12 @@ const signOutFailure = () => {
   view.showAlert(`error`, `Error signing out`)
 }
 
+const isSignedIn = function () {
+  return (store.user)
+}
+
 module.exports = {
-  // signUpSuccess,
+  isSignedIn,
   signUpFailure,
   signInSuccess,
   signInFailure,

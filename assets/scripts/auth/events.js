@@ -6,9 +6,8 @@ const authApi = require('./api')
 const authUi = require('./ui')
 const meetingApi = require('../meetups/api')
 const meetingUi = require('../meetups/ui')
-
-// view controller methods
 const view = require('../view')
+
 
 const onSignUp = function (event) {
   const data = getFormFields(event.target)
@@ -97,17 +96,18 @@ const onSignOut = function (event) {
 const addHandlers = () => {
   $('.navbar-div').on('click', '#sign-up-btn', view.showAuth)
   $('.navbar-div').on('click', '#sign-in-btn', view.showAuth)
+
   // user sign in form submission
-  $('.content-div').on('submit', '#sign-in', onSignIn)
+  $('.search-div').on('submit', '#sign-in', onSignIn)
   // new user sign up form submission
-  $('.content-div').on('submit', '#sign-up', onSignUp)
+  $('.search-div').on('submit', '#sign-up', onSignUp)
   // change password form submission
   $('.navbar-div').on('submit', '#change-password', onChangePassword)
   // sign out buton click
   $('.navbar-div').on('click', '#sign-out-btn', onSignOut)
 
   // tabbed ui toggles
-  $('.content-div').on('show.bs.tab', 'a[data-toggle="tab"]', function (event) {
+  $('.search-div').on('show.bs.tab', 'a[data-toggle="tab"]', function (event) {
     // clear fields from previous active tab
     $($(event.relatedTarget).attr('href')).find('.form-control').val('')
 

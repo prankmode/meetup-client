@@ -1,0 +1,47 @@
+<div>
+
+  {{#if data}}
+    <h2>meetups!</h2>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th class="col-sm-6 col-xs-8">
+            <strong>Meetup id</strong>
+          </th>
+          <th class="col-sm-6 col-xs-4hidden-xs">
+            <strong>Meetup name</strong>
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {{#each data as |meetup|}}
+          <tr meetup-id="{{meetup.id}}">
+            <td>{{formatTime meetup.time "h:mm a"}}</td>
+            <td class="col-sm-6 col-xs-8">
+              <a href="{{meetup.event_url}}" class="btn btn-link" target="_blank">{{meetup.name}}</a>
+            </td>
+            {{#if current_user}}
+              <td><button class="btn btn-xs btn-danger" id="meetup-cancel-reminder">Cancel Reminder!</button</td>
+                {{else}}
+                <td><button class="btn btn-xs btn-warning" id="meetup-remind-me">Remind me!</button</td>
+                {{/if}}
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{{else}}
+<h2>You have no meetups! Sad!</h2>
+{{/if}}
+</div>
+
+
+
+<!--
+<ul>
+  <li class="one-meetup">
+    <div class="m-time"></div>
+    <div class="m-group"></div>
+    <div class="m-name"></div>
+  </li>
+</ul> -->

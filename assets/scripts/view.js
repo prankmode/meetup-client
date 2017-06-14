@@ -59,18 +59,19 @@ const clearView = (element) => {
 const setSignedOutMode = () => {
   // closeAlert()
   renderView('.navbar-div', 'nav-so')
-  renderView('.content-div', 'form-auth')
+  renderView('.search-div', 'form-auth')
   clearView('.temp-div')
 }
 
 const setSignedInMode = () => {
   // closeAlert()
   renderView('.navbar-div', 'nav-si')
+  clearView('.search-div')
   // initTempView()
 }
 
 const showAuth = () => {
-  renderView('.content-div', 'form-auth')
+  renderView('.search-div', 'form-auth')
 }
 
 // formAlert(form, field)
@@ -120,7 +121,7 @@ const showAlert = (mode, message) => {
     replaceView('.alert', 'alert', { mode: mode, message: message })
   } else {
     // insert a new alert
-    prependView('.content-div', 'alert', { mode: mode, message: message })
+    prependView('.search-div', 'alert', { mode: mode, message: message })
   }
 }
 
@@ -166,10 +167,17 @@ const showChangePasswordFailure = () => {
 
 const showMeetups = (meetups) => {
   console.log('view:showMeetups: meetups: ', meetups)
-  renderView('.content-div', 'search-page', { data: meetups })
+  renderView('.meetups-div', 'show-meetups', { data: meetups })
+}
+
+const showSearchBox = () => {
+  console.log('view:showSearchBox')
+  renderView('.search-div', 'search-page')
 }
 
 const addHandlers = () => {
+
+  $('.navbar-div').on('click', '#peek-search-btn', showSearchBox)
 
   // DROPDOWN MENU EVENTS
   // add animation to dropdown expand
@@ -205,7 +213,7 @@ const initView = () => {
   // If you are not logged in, just put up a search box
   // and allow user to search for meetups.  Being a user is
   // not yet required.
-  renderView('.content-div', 'search-page')
+  renderView('.search-div', 'search-page')
   // add event handlers for view contoller elements
   addHandlers()
 }
