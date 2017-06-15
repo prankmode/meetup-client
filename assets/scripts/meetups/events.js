@@ -59,12 +59,21 @@ const onCancelReminder = function (event) {
     .catch(meetupsUi.deleteMeetupFailure)
 }
 
+const onSendReminderEmail = function (event) {
+  event.preventDefault()
+  console.log('event:onSendReminderEmail')
+  meetupsApi.sendEmail()
+    .then(meetupsUi.sendEmailSuccess)
+    .catch(meetupsUi.sendEmailFailure)
+}
+
 const addHandlers = function () {
   $('.search-div').on('submit', '#m-search', onSearchMeetups)
   $('.navbar-div').on('click', '#show-mypeeks-btn', onGetMyMeetups)
 
-  $('.meetups-div').on('click', '#meetup-remind-me', onRemind)
-  $('.meetups-div').on('click', '#meetup-cancel-reminder', onCancelReminder)
+  $('.all-meetups-div').on('click', '#meetup-remind-me', onRemind)
+  $('.my-meetups-div').on('click', '#meetup-cancel-reminder', onCancelReminder)
+  $('.my-meetups-div').on('click', '#m-search', onSendReminderEmail)
 }
 
 module.exports = {

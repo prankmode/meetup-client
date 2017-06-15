@@ -1,0 +1,54 @@
+
+<div>
+
+{{#if data}}
+<h2>got data</h2>
+{{/if}}
+
+{{#if user}}
+<h2>got a user</h2>
+{{/if}}
+
+
+  {{#if data}}
+
+    <h2>Search results</h2>
+
+    <table class="table table-hover">
+
+      <thead>
+        <tr>
+          <th class="col-sm-6 col-xs-8"><strong>Date</strong></th>
+          <th class="col-sm-6 col-xs-4"><strong>Meetup name</strong></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {{#each data as |meetup|}}
+          <tr meetup-id="{{meetup.id}}">
+            <td class="col-sm-3 col-xs-4">{{formatTime meetup.time "h:mm a"}}</td>
+            <td class="col-sm-6 col-xs-6">
+              <a href="{{meetup.event_url}}" class="btn btn-link" target="_blank">{{meetup.name}}</a>
+            </td>
+              {{#if user}}
+                <td class="col-sm-3 col-xs-2"><a tabindex="0"
+                    class="btn btn-xs btn-warning" id="meetup-remind-me"
+                    role="button">Remind me!</a></td>
+              {{else}}
+                <td class="col-sm-3 col-xs-2"><a tabindex="0" class="btn btn-xs btn-warning" id="meetup-remind-me" role="button"
+                  data-toggle="popover" data-placement="left" data-trigger="focus" title="Not so fast..."
+                  data-content="You must be signed in to save reminders.">Remind me!</a></td>
+
+              {{/if}}
+
+          </tr>
+        {{/each}}
+    </tbody>
+
+  </table>
+  {{else}}
+    <h2>You have no meetups! Sad!</h2>
+  {{/if}}
+
+
+</div>

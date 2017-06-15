@@ -181,21 +181,25 @@ const showChangePasswordFailure = () => {
 
 const showMeetups = (meetups, div) => {
   console.log('view:showMeetups: meetups: ', meetups)
-  let head = 'Meetups'
-  if (div === '.all-meetups-div') {
-    head = 'Search results'
+
+  if (div === '.my-meetups-div') {
+    renderView(div, 'show-my-meetups', { data: meetups })
   } else {
-    head = 'My saved meetups'
+    renderView(div, 'show-all-meetups', { user: store.user, data: meetups })
   }
-  renderView(div, 'show-meetups', { header: head, user: store.user, data: meetups })
-  // renderView('.meetups-div', 'wtf', { user: store.user, data: meetups })
-  if (!store.user) {
+  // if someone is signed in, don't show any popovers
+  if (store.user) {
+    console.log('disposing of popovers')
+    $(function () {
+      $('[data-toggle="popover"]').popover()
+    })
+  } else {
+    console.log('turning popovers on')
     $(function () {
       $('[data-toggle="popover"]').popover()
     })
   }
 }
-
 
 const showSearchBox = () => {
   console.log('view:showSearchBox')
@@ -203,7 +207,6 @@ const showSearchBox = () => {
 }
 
 const addHandlers = () => {
-
   $('.navbar-div').on('click', '#peek-search-btn', showSearchBox)
 
   // DROPDOWN MENU EVENTS

@@ -42,7 +42,18 @@ const deleteMeetupSuccess = () => {
   console.log('ui:deleteMeetupsSuccess')
 }
 
+const sendEmailFailure = () => {
+  console.log('ui:sendEmailFailure')
+  view.showAlert(`error`, `Couldn't email your reminders.`)
+}
+
+const sendEmailSuccess = () => {
+  console.log('ui:sendEMailSuccess')
+}
+
 module.exports = {
+  sendEmailSuccess,
+  sendEmailFailure,
   getMyMeetupsSuccess,
   getMyMeetupsFailure,
   createMeetupSuccess,
