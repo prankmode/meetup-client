@@ -2,7 +2,7 @@
 
 const config = {
   apiOrigins: {
-    production: '',
+    production: 'https://sleepy-bayou-40417.herokuapp.com',
     development: 'http://localhost:4741'
   }
 }
