@@ -4,14 +4,22 @@ const getFormFields = require('../../../lib/get-form-fields')
 const view = require('../view')
 const meetupsApi = require('./api')
 const meetupsUi = require('./ui')
-const authUi = require('../auth/ui')
+const store = require('../store')
 
-const onGetMeetups = function (event) {
+const isSignedIn = function () {
+  return (store.user)
+}
+
+const onGetMyMeetups = function (event) {
   event.preventDefault()
   console.log('events:onGetMeetups')
-  meetupsApi.getMeetups()
-    .then(meetupsUi.getMeetupsSuccess)
-    .catch(meetupsUi.getMeetupsFailure)
+  if (!isSignedIn()) {
+    view.showAlert(`error`, `You must be signed in to get your own meetups`)
+  } else {
+    meetupsApi.getMyMeetups()
+      .then(meetupsUi.getMyMeetupsSuccess)
+      .catch(meetupsUi.getMyMeetupsFailure)
+  }
 }
 
 const onSearchMeetups = function (event) {
@@ -26,9 +34,7 @@ const onSearchMeetups = function (event) {
 const onRemind = function (event) {
   event.preventDefault()
   console.log('events:onRemind')
-  if (!authUi.isSignedIn()) {
-    view.showAlert(`error`, `You must be signed in to add reminders`)
-  } else {
+  if (isSignedIn()) {
     const meetupId = $(this).closest('tr').attr('meetup-id')
     console.log('meetupId ', meetupId)
     meetupsApi.createMeetup(meetupId)
@@ -45,13 +51,17 @@ const onCancelReminder = function (event) {
   console.log('meetupId ', meetupId)
   meetupsApi.deleteMeetup(meetupId)
     .then(meetupsUi.deleteMeetupSuccess)
+    .then(() => {
+      meetupsApi.getMyMeetups()
+        .then(meetupsUi.getMyMeetupsSuccess)
+        .catch(meetupsUi.getMyMeetupsFailure)
+    })
     .catch(meetupsUi.deleteMeetupFailure)
-
 }
 
 const addHandlers = function () {
   $('.search-div').on('submit', '#m-search', onSearchMeetups)
-  $('.navbar-div').on('click', '#show-mypeeks', onGetMeetups)
+  $('.navbar-div').on('click', '#show-mypeeks-btn', onGetMyMeetups)
 
   $('.meetups-div').on('click', '#meetup-remind-me', onRemind)
   $('.meetups-div').on('click', '#meetup-cancel-reminder', onCancelReminder)
@@ -59,5 +69,5 @@ const addHandlers = function () {
 
 module.exports = {
   addHandlers,
-  onGetMeetups
+  onGetMyMeetups
 }

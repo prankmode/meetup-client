@@ -11,16 +11,14 @@ const signUpFailure = () => {
 }
 
 const signInSuccess = (response) => {
-  // store current user
   store.user = response.user
-  // set app to private mode
+  // change the contents of the nav bar now that we are signed in
   view.setSignedInMode()
 }
 
 const signInFailure = () => {
-  // error message
   view.showAlert(`error`, `Error signing in - try again.`)
-  // clear sign up form
+  // clear the form
   view.clearForm('#sign-in')
 }
 
@@ -37,7 +35,7 @@ const changePasswordFailure = () => {
 const signOutSuccess = () => {
   // clear current user
   store.user = null
-  // set app to signed out mode
+  // set to signed out mode
   view.setSignedOutMode()
 }
 
@@ -46,12 +44,8 @@ const signOutFailure = () => {
   view.showAlert(`error`, `Error signing out`)
 }
 
-const isSignedIn = function () {
-  return (store.user)
-}
 
 module.exports = {
-  isSignedIn,
   signUpFailure,
   signInSuccess,
   signInFailure,

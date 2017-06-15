@@ -4,8 +4,8 @@ const getFormFields = require('../../../lib/get-form-fields')
 
 const authApi = require('./api')
 const authUi = require('./ui')
-const meetingApi = require('../meetups/api')
-const meetingUi = require('../meetups/ui')
+const meetupsApi = require('../meetups/api')
+const meetupsUi = require('../meetups/ui')
 const view = require('../view')
 
 
@@ -30,11 +30,6 @@ const onSignUp = function (event) {
       .then(() => {
         authApi.signIn(data)
           .then(authUi.signInSuccess)
-          .then(() => {
-            meetingApi.getMeetups()
-              .then(meetingUi.getMeetupsSuccess)
-              .catch(meetingUi.getMeetupsFailure)
-          })
           .catch(authUi.signInFailure)
       })
       .catch(authUi.signUpFailure)
@@ -42,7 +37,6 @@ const onSignUp = function (event) {
 }
 
 const onSignIn = function (event) {
-
   const data = getFormFields(this)
   event.preventDefault()
 
@@ -54,15 +48,14 @@ const onSignIn = function (event) {
   } else {
     authApi.signIn(data)
       .then(authUi.signInSuccess)
-      .then(() => {
-        meetingApi.getMeetups()
-          .then(meetingUi.getMeetupsSuccess)
-          .catch(meetingUi.getMeetupsFailure)
+      .then(function () {
+        meetupsApi.getMyMeetups()
+          .then(meetupsUi.getMyMeetupsSuccess)
+          .catch(meetupsUi.getMyMeetupsFailure)
       })
       .catch(authUi.signInFailure)
   }
 }
-
 
 const onChangePassword = function (event) {
   const data = getFormFields(event.target)
@@ -94,8 +87,12 @@ const onSignOut = function (event) {
 //    assign event handlers to forms, buttons, and links in the UI
 
 const addHandlers = () => {
-  $('.navbar-div').on('click', '#sign-up-btn', view.showAuth)
-  $('.navbar-div').on('click', '#sign-in-btn', view.showAuth)
+  $('.navbar-div').on('click', '#sign-up-btn', function () {
+    view.showAuth('signup')
+  })
+  $('.navbar-div').on('click', '#sign-in-btn', function () {
+    view.showAuth('signin')
+  })
 
   // user sign in form submission
   $('.search-div').on('submit', '#sign-in', onSignIn)

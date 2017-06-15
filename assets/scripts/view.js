@@ -1,4 +1,5 @@
 'use strict'
+const store = require('./store')
 
 // renderView(element, hbsFile, params)
 // element - the html element that will be replaced with the
@@ -59,7 +60,8 @@ const clearView = (element) => {
 const setSignedOutMode = () => {
   // closeAlert()
   renderView('.navbar-div', 'nav-so')
-  renderView('.search-div', 'form-auth')
+  renderView('.search-div', 'search-bar')
+  clearView('.meetups-div')
   clearView('.temp-div')
 }
 
@@ -70,8 +72,20 @@ const setSignedInMode = () => {
   // initTempView()
 }
 
-const showAuth = () => {
-  renderView('.search-div', 'form-auth')
+const showAuth = (inOrUp) => {
+  if (inOrUp == 'signin') {
+    renderView('.search-div', 'form-auth')
+    $('#sign-in-tab').addClass('active')
+    $('#sign-in-pane').addClass('active')
+    $('#sign-up-tab').removeClass('active')
+    $('#sign-up-pane').removeClass('active')
+  } else {
+    renderView('.search-div', 'form-auth')
+    $('#sign-up-tab').addClass('active')
+    $('#sign-up-pane').addClass('active')
+    $('#sign-in-tab').removeClass('active')
+    $('#sign-in-pane').removeClass('active')
+  }
 }
 
 // formAlert(form, field)
@@ -162,17 +176,30 @@ const showChangePasswordFailure = () => {
   // clear change password form fields
   $('#change-password input').val('')
   // display successful alert message
-  showAlert(`error`, `For highly complex reasons, your password couldn't be changed.`)
+  showAlert(`error`, `Could not change your password.  Not for lack of trying.`)
 }
 
-const showMeetups = (meetups) => {
+const showMeetups = (meetups, div) => {
   console.log('view:showMeetups: meetups: ', meetups)
-  renderView('.meetups-div', 'show-meetups', { data: meetups })
+  let head = 'Meetups'
+  if (div === '.all-meetups-div') {
+    head = 'Search results'
+  } else {
+    head = 'My saved meetups'
+  }
+  renderView(div, 'show-meetups', { header: head, user: store.user, data: meetups })
+  // renderView('.meetups-div', 'wtf', { user: store.user, data: meetups })
+  if (!store.user) {
+    $(function () {
+      $('[data-toggle="popover"]').popover()
+    })
+  }
 }
+
 
 const showSearchBox = () => {
   console.log('view:showSearchBox')
-  renderView('.search-div', 'search-page')
+  renderView('.search-div', 'search-bar')
 }
 
 const addHandlers = () => {
@@ -213,7 +240,7 @@ const initView = () => {
   // If you are not logged in, just put up a search box
   // and allow user to search for meetups.  Being a user is
   // not yet required.
-  renderView('.search-div', 'search-page')
+  renderView('.search-div', 'search-bar')
   // add event handlers for view contoller elements
   addHandlers()
 }

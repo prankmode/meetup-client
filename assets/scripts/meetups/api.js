@@ -3,15 +3,16 @@
 const store = require('../store')
 const config = require('../config')
 
-const getMeetups = () => {
-  console.log('api:getMeetups')
-  return $.ajax({
+const getMyMeetups = () => {
+  console.log('api:getMyMeetups')
+  const rv = $.ajax({
     url: config.apiOrigin + '/meetups',
     method: 'GET',
     headers: {
       'Authorization': 'Token token=' + store.user.token
     }
   })
+  return rv
 }
 
 const searchMeetups = (data) => {
@@ -38,7 +39,7 @@ const createMeetup = (data) => {
 const deleteMeetup = (data) => {
   console.log('api:deleteMeetup')
   return $.ajax({
-    url: config.apiOrigin + '/delete/' + data,
+    url: config.apiOrigin + '/meetups/' + data,
     method: 'DELETE',
     headers: {
       'Authorization': 'Token token=' + store.user.token
@@ -49,6 +50,7 @@ const deleteMeetup = (data) => {
 
 module.exports = {
   createMeetup,
-  getMeetups,
+  deleteMeetup,
+  getMyMeetups,
   searchMeetups
 }

@@ -1,11 +1,11 @@
 <div class="row">
   <div class="col-md-6 col-sm-8 col-md-offset-3 col-sm-offset-2">
-    <ul class="nav nav-tabs">
-      <li class="active"><a data-toggle="tab" href="#sign-in-tab">Sign In</a></li>
-      <li><a data-toggle="tab" href="#sign-up-tab">Sign Up</a></li>
+    <ul class="nav nav-pills">
+      <li class="active" id="sign-in-tab"><a data-toggle="tab" href="#sign-in-pane">Sign In</a></li>
+      <li id="sign-up-tab"><a data-toggle="tab" href="#sign-up-pane">Sign Up</a></li>
     </ul>
     <div class="tab-content">
-      <div id="sign-in-tab" class="tab-pane in active">
+      <div id="sign-in-pane" class="tab-pane in active">
         <!-- layout for sign in panel -->
         <div class="panel panel-default">
           <div class="panel-body">
@@ -17,7 +17,7 @@
                   <label for="sign-in-email" class="sr-only">Email</label>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                    <input type="text" class="form-control" name="credentials[email]" id="sign-in-email" placeholder="Email Address" value="">
+                    <input type="email" class="form-control" name="credentials[email]" id="sign-in-email" placeholder="Email Address" value="">
                   </div>
                   <p class="help-block">Please enter an email address.</p>
                 </div>
@@ -37,7 +37,7 @@
           </div>
         </div>
       </div>
-      <div id="sign-up-tab" class="tab-pane">
+      <div id="sign-up-pane" class="tab-pane">
         <!-- layout for sign up panel -->
         <div class="panel panel-default">
           <div class="panel-body">

@@ -2,21 +2,21 @@
 
 const view = require('../view.js')
 
-const getMeetupsSuccess = (response) => {
-  console.log('ui:getMeetupsSuccess')
+const getMyMeetupsSuccess = (response) => {
+  console.log('ui:getMyMeetupsSuccess')
   console.log(response)
-  view.showMeetups(response.meetups)
+  view.showMeetups(response.meetups, '.my-meetups-div')
 }
 
-const getMeetupsFailure = () => {
-  console.log('ui:getMeetupsFailure')
-  view.showAlert(`error`, `Hmmm. Couldn't get your list of meetups...`)
+const getMyMeetupsFailure = () => {
+  console.log('ui:getMyMeetupsFailure')
+  view.showAlert(`error`, `Couldn't get your list of meetups...`)
 }
 
 const searchMeetupsSuccess = (response) => {
   console.log('ui:getMeetupsSuccess')
   console.log(response)
-  view.showMeetups(response.results)
+  view.showMeetups(response.results, '.all-meetups-div')
 }
 
 const searchMeetupsFailure = () => {
@@ -43,8 +43,10 @@ const deleteMeetupSuccess = () => {
 }
 
 module.exports = {
-  getMeetupsSuccess,
-  getMeetupsFailure,
+  getMyMeetupsSuccess,
+  getMyMeetupsFailure,
+  createMeetupSuccess,
+  createMeetupFailure,
   deleteMeetupSuccess,
   deleteMeetupFailure,
   searchMeetupsSuccess,
