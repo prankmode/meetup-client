@@ -37,7 +37,6 @@ const signOutSuccess = () => {
   store.user = null
   // set to signed out mode
   view.setSignedOutMode()
-
 }
 
 const signOutFailure = () => {
@@ -45,10 +44,22 @@ const signOutFailure = () => {
   view.showAlert(`error`, `Error signing out`)
 }
 
+const updateEmailSuccess = () => {
+  // need to make that form go away
+  view.clearView('.search-div')
+}
+
+const updateEmailFailure = () => {
+  // need to make that form go away
+  view.showAlert(`error`, `Could not confirm email.`)
+}
+
 module.exports = {
   signUpFailure,
   signInSuccess,
   signInFailure,
+  updateEmailSuccess,
+  updateEmailFailure,
   changePasswordSuccess,
   changePasswordFailure,
   signOutSuccess,

@@ -202,6 +202,12 @@ const showSearchBox = () => {
   renderView('.search-div', 'search-bar')
 }
 
+const confirmEmail = () => {
+  console.log('view:confirmEmail')
+  renderView('.search-div', 'confirm-email', { email: store.user.email })
+  showAlert(`error`, `Please confirm your reminder email.`)
+}
+
 const addHandlers = () => {
   $('.navbar-div').on('click', '#peek-search-btn', showSearchBox)
 
@@ -252,8 +258,10 @@ module.exports = {
   formAlert,
   clearForm,
   clearFormAlerts,
+  clearView,
   closeError,
   closeAlert,
+  confirmEmail,
   showChangePasswordSuccess,
   showChangePasswordFailure,
   showMeetups,

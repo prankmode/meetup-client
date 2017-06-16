@@ -68,9 +68,15 @@ const onCancelReminder = function (event) {
 const onSendReminderEmail = function (event) {
   event.preventDefault()
   console.log('event:onSendReminderEmail')
-  meetupsApi.sendEmail()
-    .then(meetupsUi.sendEmailSuccess)
-    .catch(meetupsUi.sendEmailFailure)
+  //  make sure we have a good email to send to
+  if (!store.user.verified_reminder_email) {
+    console.log('no verified email')
+    view.confirmEmail()
+  } else {
+    meetupsApi.sendEmail()
+      .then(meetupsUi.sendEmailSuccess)
+      .catch(meetupsUi.sendEmailFailure)
+  }
 }
 
 const addHandlers = function () {

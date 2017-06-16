@@ -82,6 +82,15 @@ const onSignOut = function (event) {
     .catch(authUi.signOutFailure)
 }
 
+const onUpdateEmail = function (event) {
+  const data = getFormFields(event.target)
+  event.preventDefault()
+
+  authApi.updateEmail(data)
+    .then(authUi.updateEmailSuccess)
+    .catch(authUi.updateEmailFailure)
+}
+
 // addHandlers()
 //    assign event handlers to forms, buttons, and links in the UI
 
@@ -93,14 +102,11 @@ const addHandlers = () => {
     view.showAuth('signin')
   })
 
-  // user sign in form submission
   $('.search-div').on('submit', '#sign-in', onSignIn)
-  // new user sign up form submission
   $('.search-div').on('submit', '#sign-up', onSignUp)
-  // change password form submission
   $('.navbar-div').on('submit', '#change-password', onChangePassword)
-  // sign out buton click
-  $('.navbar-div').on('click', '#sign-out-btn', onSignOut)
+  $('.navbar-div').on('click',  '#sign-out-btn', onSignOut)
+  $('.search-div').on('submit', '#confirm-email', onUpdateEmail)
 
   // tabbed ui toggles
   $('.search-div').on('show.bs.tab', 'a[data-toggle="tab"]', function (event) {
