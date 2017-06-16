@@ -1,6 +1,11 @@
 <div>
-  <h2>Take a peek at what tech meetups are out there</h2>
-  <h3>...or sign in and check your saved meetups</h3>
+git
+  {{#if user}}
+    <h3>Take a peek at what tech meetups are out there</h3>
+  {{else}}
+    <h3>Take a peek at what tech meetups are out there</h3>
+    <h4>...or sign in and check your saved meetups</h4>
+  {{/if}}
 
   <form id="m-search" class="form-inline">
     <div class="form-group">

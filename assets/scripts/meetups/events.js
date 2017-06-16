@@ -12,7 +12,6 @@ const isSignedIn = function () {
 
 const onGetMyMeetups = function (event) {
   event.preventDefault()
-  console.log('events:onGetMeetups')
   if (!isSignedIn()) {
     view.showAlert(`error`, `You must be signed in to get your own meetups`)
   } else {
@@ -24,9 +23,7 @@ const onGetMyMeetups = function (event) {
 
 const onSearchMeetups = function (event) {
   event.preventDefault()
-  console.log('events:onSearchMeetups')
   const data = getFormFields(this)
-  console.log(data.m_search.location)
   // make sure it's a zip code for now
   if (/^([0-9]{5})$/.test(data.m_search.location)) {
     meetupsApi.searchMeetups(data)
@@ -39,10 +36,8 @@ const onSearchMeetups = function (event) {
 
 const onRemind = function (event) {
   event.preventDefault()
-  console.log('events:onRemind')
   if (isSignedIn()) {
     const meetupId = $(this).attr('meetup-id')
-    console.log('meetupId ', meetupId)
     meetupsApi.createMeetup(meetupId)
       .then(meetupsUi.createMeetupSuccess)
       .catch(meetupsUi.createMeetupFailure)
@@ -51,10 +46,7 @@ const onRemind = function (event) {
 
 const onCancelReminder = function (event) {
   event.preventDefault()
-  console.log('events:onCancelReminder')
-
   const meetupId = $(this).attr('meetup-id')
-  console.log('meetupId ', meetupId)
   meetupsApi.deleteMeetup(meetupId)
     .then(meetupsUi.deleteMeetupSuccess)
     .then(() => {
@@ -67,10 +59,8 @@ const onCancelReminder = function (event) {
 
 const onSendReminderEmail = function (event) {
   event.preventDefault()
-  console.log('event:onSendReminderEmail')
   //  make sure we have a good email to send to
   if (!store.user.verified_reminder_email) {
-    console.log('no verified email')
     view.confirmEmail()
   } else {
     meetupsApi.sendEmail()

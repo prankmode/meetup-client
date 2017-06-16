@@ -8,9 +8,6 @@ const store = require('./store')
 // params   - data for the handlebars file
 //
 const renderView = (element, hbsFile, params) => {
-  console.log('renderView')
-  console.log('hbsFile ', hbsFile)
-  console.log('params', params)
   const template = require(`./templates/${hbsFile}.handlebars`)
   const content = template(params)
   $(element).html(content)
@@ -60,7 +57,7 @@ const clearView = (element) => {
 const setSignedOutMode = () => {
   // closeAlert()
   renderView('.navbar-div', 'nav-so')
-  renderView('.search-div', 'search-bar')
+  renderView('.search-div', 'search-bar', { user: null })
   clearView('.all-meetups-div')
   clearView('.my-meetups-div')
 }
@@ -181,8 +178,6 @@ const showChangePasswordFailure = () => {
 }
 
 const showMeetups = (meetups, div) => {
-  console.log('view:showMeetups: meetups: ', meetups)
-
   if (div === '.my-meetups-div') {
     renderView(div, 'show-my-meetups', { data: meetups })
   } else {
@@ -190,7 +185,6 @@ const showMeetups = (meetups, div) => {
   }
   // if someone is signed in, don't show any popovers
   if (!store.user) {
-    console.log('turning popovers on')
     $(function () {
       $('[data-toggle="popover"]').popover()
     })
@@ -198,12 +192,10 @@ const showMeetups = (meetups, div) => {
 }
 
 const showSearchBox = () => {
-  console.log('view:showSearchBox')
-  renderView('.search-div', 'search-bar')
+  renderView('.search-div', 'search-bar', {user: store.user})
 }
 
 const confirmEmail = () => {
-  console.log('view:confirmEmail')
   renderView('.search-div', 'confirm-email', { email: store.user.email })
   showAlert(`error`, `Please confirm your reminder email.`)
 }
@@ -245,7 +237,7 @@ const initView = () => {
   // If you are not logged in, just put up a search box
   // and allow user to search for meetups.  Being a user is
   // not yet required.
-  renderView('.search-div', 'search-bar')
+  renderView('.search-div', 'search-bar', { user: null })
   // add event handlers for view contoller elements
   addHandlers()
 }
