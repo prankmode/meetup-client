@@ -57,7 +57,7 @@ const clearView = (element) => {
 const setSignedOutMode = () => {
   // closeAlert()
   renderView('.navbar-div', 'nav-so')
-  renderView('.search-div', 'search-bar', { user: null })
+  renderView('.search-div', 'search-bar')
   clearView('.all-meetups-div')
   clearView('.my-meetups-div')
 }
@@ -237,7 +237,7 @@ const initView = () => {
   // If you are not logged in, just put up a search box
   // and allow user to search for meetups.  Being a user is
   // not yet required.
-  renderView('.search-div', 'search-bar', { user: null })
+  renderView('.search-div', 'search-bar')
   // add event handlers for view contoller elements
   addHandlers()
 }

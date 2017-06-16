@@ -44,7 +44,10 @@ const signOutFailure = () => {
   view.showAlert(`error`, `Error signing out`)
 }
 
-const updateEmailSuccess = () => {
+const updateEmailSuccess = (response) => {
+  // re-store the user because it has more values filled in
+  store.user.verified_reminder_email = response.user.verified_reminder_email
+  store.user.reminder_email = response.user.reminder_email
   // need to make that form go away
   view.clearView('.search-div')
 }
