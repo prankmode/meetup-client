@@ -1,0 +1,38 @@
+
+<div>
+
+{{#if data}}
+
+  <h2>Search results</h2>
+  <div class="row">
+    <div class="col-sm-3"><h4>Date</h4></div>
+    <div class="col-sm-7"><h4>Meetup</h4></div>
+  </div>
+
+  {{#each data as |meetup|}}
+      <div class="row">
+         <div class="col-sm-3" >
+           <h6>{{formatTime meetup.time "hh:mm a"}}</h6>
+           <h4>{{formatTime meetup.time "MMMM Do"}}</h4>
+         </div>
+         <div class="col-sm-7" >
+           <h6>{{meetup.group.name}}</h6>
+           <h4><a href="{{meetup.event_url}}" target="_blank">{{meetup.name}}</a></h4>
+         </div>
+         <div class="col-sm-2">
+           {{#if user}}
+             <a class="btn btn-xs btn-warning" id="meetup-remind-me" role="button">Remind me!</a>
+           {{else}}
+             <button class="btn btn-xs btn-warning" meetup-id="{{meetup.id}}" id="meetup-remind-me" role="button"
+             data-toggle="popover" data-placement="left" data-trigger="focus" title="Not so fast..."
+             data-content="You must be signed in to save reminders.">Remind me!</button>
+           {{/if}}
+         </div>
+       </div>
+    {{/each}}
+  {{else}}
+    <h2>You have no meetups! Sad!</h2>
+  {{/if}}
+
+
+</div>

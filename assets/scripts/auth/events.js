@@ -8,7 +8,6 @@ const meetupsApi = require('../meetups/api')
 const meetupsUi = require('../meetups/ui')
 const view = require('../view')
 
-
 const onSignUp = function (event) {
   const data = getFormFields(event.target)
   event.preventDefault()

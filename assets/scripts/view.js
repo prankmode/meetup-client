@@ -61,19 +61,20 @@ const setSignedOutMode = () => {
   // closeAlert()
   renderView('.navbar-div', 'nav-so')
   renderView('.search-div', 'search-bar')
-  clearView('.meetups-div')
-  clearView('.temp-div')
+  clearView('.all-meetups-div')
+  clearView('.my-meetups-div')
 }
 
 const setSignedInMode = () => {
   // closeAlert()
   renderView('.navbar-div', 'nav-si')
   clearView('.search-div')
+  clearView('.all-meetups-div')
   // initTempView()
 }
 
 const showAuth = (inOrUp) => {
-  if (inOrUp == 'signin') {
+  if (inOrUp === 'signin') {
     renderView('.search-div', 'form-auth')
     $('#sign-in-tab').addClass('active')
     $('#sign-in-pane').addClass('active')
@@ -181,21 +182,20 @@ const showChangePasswordFailure = () => {
 
 const showMeetups = (meetups, div) => {
   console.log('view:showMeetups: meetups: ', meetups)
-  let head = 'Meetups'
-  if (div === '.all-meetups-div') {
-    head = 'Search results'
+
+  if (div === '.my-meetups-div') {
+    renderView(div, 'show-my-meetups', { data: meetups })
   } else {
-    head = 'My saved meetups'
+    renderView(div, 'show-all-meetups', { user: store.user, data: meetups })
   }
-  renderView(div, 'show-meetups', { header: head, user: store.user, data: meetups })
-  // renderView('.meetups-div', 'wtf', { user: store.user, data: meetups })
+  // if someone is signed in, don't show any popovers
   if (!store.user) {
+    console.log('turning popovers on')
     $(function () {
       $('[data-toggle="popover"]').popover()
     })
   }
 }
-
 
 const showSearchBox = () => {
   console.log('view:showSearchBox')
@@ -203,7 +203,6 @@ const showSearchBox = () => {
 }
 
 const addHandlers = () => {
-
   $('.navbar-div').on('click', '#peek-search-btn', showSearchBox)
 
   // DROPDOWN MENU EVENTS

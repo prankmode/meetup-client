@@ -48,7 +48,20 @@ const deleteMeetup = (data) => {
   })
 }
 
+const sendEmail = (data) => {
+  console.log('api:sendReminderEmail')
+  return $.ajax({
+    url: config.apiOrigin + '/remind',
+    method: 'GET',
+    headers: {
+      'Authorization': 'Token token=' + store.user.token
+    },
+    data: data
+  })
+}
+
 module.exports = {
+  sendEmail,
   createMeetup,
   deleteMeetup,
   getMyMeetups,

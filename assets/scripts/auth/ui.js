@@ -37,13 +37,13 @@ const signOutSuccess = () => {
   store.user = null
   // set to signed out mode
   view.setSignedOutMode()
+
 }
 
 const signOutFailure = () => {
   // set alert error
   view.showAlert(`error`, `Error signing out`)
 }
-
 
 module.exports = {
   signUpFailure,
