@@ -61,19 +61,20 @@ const setSignedOutMode = () => {
   // closeAlert()
   renderView('.navbar-div', 'nav-so')
   renderView('.search-div', 'search-bar')
-  clearView('.meetups-div')
-  clearView('.temp-div')
+  clearView('.all-meetups-div')
+  clearView('.my-meetups-div')
 }
 
 const setSignedInMode = () => {
   // closeAlert()
   renderView('.navbar-div', 'nav-si')
   clearView('.search-div')
+  clearView('.all-meetups-div')
   // initTempView()
 }
 
 const showAuth = (inOrUp) => {
-  if (inOrUp == 'signin') {
+  if (inOrUp === 'signin') {
     renderView('.search-div', 'form-auth')
     $('#sign-in-tab').addClass('active')
     $('#sign-in-pane').addClass('active')
@@ -188,12 +189,7 @@ const showMeetups = (meetups, div) => {
     renderView(div, 'show-all-meetups', { user: store.user, data: meetups })
   }
   // if someone is signed in, don't show any popovers
-  if (store.user) {
-    console.log('disposing of popovers')
-    $(function () {
-      $('[data-toggle="popover"]').popover()
-    })
-  } else {
+  if (!store.user) {
     console.log('turning popovers on')
     $(function () {
       $('[data-toggle="popover"]').popover()

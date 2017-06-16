@@ -37,8 +37,7 @@ const signOutSuccess = () => {
   store.user = null
   // set to signed out mode
   view.setSignedOutMode()
-  view.clearView('.my-meetups-div')
-  view.clearView('.all-meetups-div')
+
 }
 
 const signOutFailure = () => {

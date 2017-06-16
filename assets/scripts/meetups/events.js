@@ -26,16 +26,22 @@ const onSearchMeetups = function (event) {
   event.preventDefault()
   console.log('events:onSearchMeetups')
   const data = getFormFields(this)
-  meetupsApi.searchMeetups(data)
-    .then(meetupsUi.searchMeetupsSuccess)
-    .catch(meetupsUi.searchMeetupsFailure)
+  console.log(data.m_search.location)
+  // make sure it's a zip code for now
+  if (/^([0-9]{5})$/.test(data.m_search.location)) {
+    meetupsApi.searchMeetups(data)
+      .then(meetupsUi.searchMeetupsSuccess)
+      .catch(meetupsUi.searchMeetupsFailure)
+  } else {
+    view.showAlert(`error`, `That is not a zip code`)
+  }
 }
 
 const onRemind = function (event) {
   event.preventDefault()
   console.log('events:onRemind')
   if (isSignedIn()) {
-    const meetupId = $(this).closest('tr').attr('meetup-id')
+    const meetupId = $(this).attr('meetup-id')
     console.log('meetupId ', meetupId)
     meetupsApi.createMeetup(meetupId)
       .then(meetupsUi.createMeetupSuccess)
@@ -47,7 +53,7 @@ const onCancelReminder = function (event) {
   event.preventDefault()
   console.log('events:onCancelReminder')
 
-  const meetupId = $(this).closest('tr').attr('meetup-id')
+  const meetupId = $(this).attr('meetup-id')
   console.log('meetupId ', meetupId)
   meetupsApi.deleteMeetup(meetupId)
     .then(meetupsUi.deleteMeetupSuccess)
@@ -73,7 +79,7 @@ const addHandlers = function () {
 
   $('.all-meetups-div').on('click', '#meetup-remind-me', onRemind)
   $('.my-meetups-div').on('click', '#meetup-cancel-reminder', onCancelReminder)
-  $('.my-meetups-div').on('click', '#m-search', onSendReminderEmail)
+  $('.my-meetups-div').on('click', '#send-email-btn', onSendReminderEmail)
 }
 
 module.exports = {

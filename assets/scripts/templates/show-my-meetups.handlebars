@@ -1,41 +1,35 @@
 
 <div>
 
+{{#if data}}
 
-  {{#if data}}
+  <h2>My peeks</h2>
+  <button type="click" id="send-email-btn" class="btn btn-default btn-primary">Send Reminder Email</button>
 
-        <h2>My peeks</h2>
-        <button type="click" class="btn btn-default btn-primary">Send Reminder Email</button>
+  <div class="row">
+    <div class="col-sm-3"><h4>Date</h4></div>
+    <div class="col-sm-7"><h4>Meetup</h4></div>
+  </div>
 
+  {{#each data as |meetup|}}
+    <div class="row">
+       <div class="col-sm-3" >
+         <h6>{{formatTime meetup.time "hh:mm a"}}</h6>
+         <h4>{{formatTime meetup.time "MMMM Do"}}</h4>
+       </div>
+       <div class="col-sm-7" >
+         <h6>{{meetup.group}}</h6>
+         <h4><a href="{{meetup.event_url}}" target="_blank">{{meetup.name}}</a></h4>
+       </div>
+       <div class="col-sm-2">
+         <button class="btn btn-xs btn-danger" meetup-id="{{meetup.id}}" id="meetup-cancel-reminder"
+           role="button">Cancel reminder!</button>
+       </div>
+     </div>
+  {{/each}}
 
-    <table class="table table-hover">
-
-      <thead>
-        <tr>
-          <th class="col-sm-6 col-xs-8"><strong>Date</strong></th>
-          <th class="col-sm-6 col-xs-4"><strong>Meetup name</strong></th>
-        </tr>
-      </thead>
-
-      <tbody>
-        {{#each data as |meetup|}}
-          <tr meetup-id="{{meetup.id}}">
-            <td class="col-sm-3 col-xs-4">{{formatTime meetup.time "h:mm a"}}</td>
-            <td class="col-sm-6 col-xs-6">
-              <a href="{{meetup.event_url}}" class="btn btn-link" target="_blank">{{meetup.name}}</a>
-            </td>
-                <td class="col-sm-3 col-xs-2"><a tabindex="0"
-                  class="btn btn-xs btn-danger" id="meetup-cancel-reminder"
-                  role="button">Cancel reminder!</a></td>
-
-          </tr>
-        {{/each}}
-    </tbody>
-
-  </table>
-  {{else}}
+{{else}}
     <h2>You have no meetups! Sad!</h2>
-  {{/if}}
-
+{{/if}}
 
 </div>
