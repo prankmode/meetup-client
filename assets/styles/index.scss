@@ -5,6 +5,12 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 body.container-fluid {
   padding-left: 0;
   padding-right: 0;
+  background-color: #bcd7e5;
+}
+
+.navbar-default {
+  margin-bottom: 0;
+  background-color: #9DB4C0;
 }
 
 // set dropdown change password form layout
@@ -12,6 +18,48 @@ body.container-fluid {
   min-width: 320px;
   padding: 15px 15px 0;
 }
+
+.jumbotron {
+  background-color: #E0FBFC;
+}
+
+h3 {
+  text-align: center;
+}
+
+.search-btn {
+  background-color: red;
+  color: white;
+}
+
+#show-mypeeks-btn, #peek-search-btn {
+  color: red;
+}
+
+input[type=number] {
+  background-color: #9DB4C0;
+}
+input[type=email] {
+  background-color: #E0FBFC;
+}
+input[type=password] {
+  background-color: #E0FBFC;
+}
+
+p {
+  text-align: center;
+  margin: 25px 0;
+}
+
+.panel-body {
+  background-color: #9DB4C0;
+  border-radius: 5px;
+}
+
+.nav-pills {
+  margin-top: 20px;
+}
+
 
 // hide validation text below form fields
 .help-block {
@@ -23,21 +71,19 @@ body.container-fluid {
   border-top: 0;
 }
 
-// make file-name anchor text appear on the left
-.file-name {
-  text-align: left;
+#meetup-remind-me {
+  margin: 25% auto;
 }
 
-// temporary fix to vertically center table text
-// should be set in bootstrap-variables
-td {
-  vertical-align: middle !important;
+.center {
+  margin: 30px auto 0 auto;
 }
 
-// make table rows appear clickable
-tbody tr {
-  cursor: pointer;
+.row {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
 }
+
 
 .btn-group {
   white-space: nowrap;

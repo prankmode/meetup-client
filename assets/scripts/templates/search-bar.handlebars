@@ -3,11 +3,12 @@
     <h3>Take a peek at what tech meetups are out there</h3>
   {{else}}
     <h3>Take a peek at what tech meetups are out there</h3>
-    <h4>...or sign in and check your saved meetups</h4>
+    <p>...or sign in and check your saved meetups</p>
   {{/if}}
 
+<div class="container center">
   <form id="m-search" class="form-inline">
-    <div class="form-group">
+    <div class="form-group col-sm-offset-1" align="center">
       <label for="m-location">Location</label>
       <input type="number" class="form-control"  name="m_search[location]" id="m_location_place" placeholder="02110" value="02110">
     </div>
@@ -15,7 +16,8 @@
       <label for="m_radius">radius</label>
       <input type="number" class="form-control" name="m_location[radius]" id="m_location_radius" placeholder="5" value="5">
     </div>
-    <button type="submit" class="btn btn-default">Search</button>
+    <button type="submit" class="btn btn-default search-btn">Search</button>
   </form>
+</div>
 
 </div>

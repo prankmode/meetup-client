@@ -26,6 +26,7 @@ const onSearchMeetups = function (event) {
   const data = getFormFields(this)
   // make sure it's a zip code for now
   if (/^([0-9]{5})$/.test(data.m_search.location)) {
+    view.clearView('.info-div')
     meetupsApi.searchMeetups(data)
       .then(meetupsUi.searchMeetupsSuccess)
       .catch(meetupsUi.searchMeetupsFailure)
